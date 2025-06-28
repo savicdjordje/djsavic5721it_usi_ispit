@@ -1,0 +1,9 @@
+{
+    "conflicts": [
+        {
+            "id": "530833c0-1e44-4957-94a7-ed0ed0871c46",
+            "currentContent": "<?php\n\nnamespace Database\\Factories;\n\nuse Illuminate\\Database\\Eloquent\\Factories\\Factory;\nuse Illuminate\\Support\\Str;\nuse App\\Models\\Status;\n\nclass StatusFactory extends Factory\n{\n    /**\n     * The name of the factory's corresponding model.\n     *\n     * @var string\n     */\n    protected $model = Status::class;\n\n    /**\n     * Define the model's default state.\n     */\n    public function definition(): array\n    {\n        return [\n            'naziv' => fake()->word(),\n        ];\n    }\n}\n",
+            "newContent": "<?php\n\nnamespace Database\\Factories;\n\nuse App\\Models\\Status;\nuse Illuminate\\Support\\Str;\nuse Illuminate\\Database\\Eloquent\\Factories\\Factory;\n\nclass StatusFactory extends Factory\n{\n    /**\n     * The name of the factory's corresponding model.\n     *\n     * @var string\n     */\n    protected $model = Status::class;\n\n    /**\n     * Define the model's default state.\n     *\n     * @return array<string, mixed>\n     */\n    public function definition(): array\n    {\n        return [\n            'naziv' => fake()->text(255),\n        ];\n    }\n}\n"
+        }
+    ]
+}
