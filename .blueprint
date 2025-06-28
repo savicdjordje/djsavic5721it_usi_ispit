@@ -1,0 +1,60 @@
+created:
+    - app/Http/Controllers/UserController.php
+    - app/Http/Controllers/StatusController.php
+    - app/Http/Controllers/VehicleController.php
+    - app/Http/Controllers/ServiceController.php
+    - app/Http/Controllers/BillController.php
+    - database/factories/StatusFactory.php
+    - database/factories/VehicleFactory.php
+    - database/factories/ServiceFactory.php
+    - database/factories/BillFactory.php
+    - database/migrations/2025_06_28_200054_create_statuses_table.php
+    - database/migrations/2025_06_28_200055_create_vehicles_table.php
+    - database/migrations/2025_06_28_200056_create_services_table.php
+    - database/migrations/2025_06_28_200057_create_bills_table.php
+    - app/Models/Status.php
+    - app/Models/Vehicle.php
+    - app/Models/Service.php
+    - app/Models/Bill.php
+    - tests/Feature/Http/Controllers/UserControllerTest.php
+    - tests/Feature/Http/Controllers/StatusControllerTest.php
+    - tests/Feature/Http/Controllers/VehicleControllerTest.php
+    - tests/Feature/Http/Controllers/ServiceControllerTest.php
+    - tests/Feature/Http/Controllers/BillControllerTest.php
+    - app/Http/Requests/UserStoreRequest.php
+    - app/Http/Requests/UserUpdateRequest.php
+    - app/Http/Requests/StatusStoreRequest.php
+    - app/Http/Requests/StatusUpdateRequest.php
+    - app/Http/Requests/VehicleStoreRequest.php
+    - app/Http/Requests/VehicleUpdateRequest.php
+    - app/Http/Requests/ServiceStoreRequest.php
+    - app/Http/Requests/ServiceUpdateRequest.php
+    - app/Http/Requests/BillStoreRequest.php
+    - app/Http/Requests/BillUpdateRequest.php
+    - resources/views/user/index.blade.php
+    - resources/views/user/create.blade.php
+    - resources/views/user/show.blade.php
+    - resources/views/user/edit.blade.php
+    - resources/views/status/index.blade.php
+    - resources/views/status/create.blade.php
+    - resources/views/status/show.blade.php
+    - resources/views/status/edit.blade.php
+    - resources/views/vehicle/index.blade.php
+    - resources/views/vehicle/create.blade.php
+    - resources/views/vehicle/show.blade.php
+    - resources/views/vehicle/edit.blade.php
+    - resources/views/service/index.blade.php
+    - resources/views/service/create.blade.php
+    - resources/views/service/show.blade.php
+    - resources/views/service/edit.blade.php
+    - resources/views/bill/index.blade.php
+    - resources/views/bill/create.blade.php
+    - resources/views/bill/show.blade.php
+    - resources/views/bill/edit.blade.php
+updated:
+    - routes/web.php
+models:
+    Status: { naziv: string }
+    Vehicle: { klijent_id: 'id foreign:user', registarski_broj: string, marka: string, model: string, godina_proizvodnje: integer }
+    Service: { vozilo_id: 'id foreign:vehicle', zaposleni_id: 'id foreign:user', admin_id: 'id foreign:user', status_id: 'id foreign:status', naziv: string, opis: 'text nullable' }
+    Bill: { usluga_id: 'id foreign:service', cena: float }

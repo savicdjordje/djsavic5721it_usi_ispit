@@ -1,0 +1,45 @@
+models:
+  # User:
+  #   ime: string
+  #   prezime: string
+  #   email: string unique
+  #   broj_telefona: string
+  #   role: enum:klijent,admin,zaposleni
+
+  Status:
+    naziv: string
+
+  Vehicle:
+    klijent_id: id foreign:user
+    registarski_broj: string
+    marka: string
+    model: string
+    godina_proizvodnje: integer
+
+  Service:
+    vozilo_id: id foreign:vehicle
+    zaposleni_id: id foreign:user
+    admin_id: id foreign:user
+    status_id: id foreign:status
+    naziv: string
+    opis: text nullable
+
+  Bill:
+    usluga_id: id foreign:service
+    cena: float
+
+controllers:
+  User:
+    resource
+
+  Status:
+    resource
+
+  Vehicle:
+    resource
+
+  Service:
+    resource
+
+  Bill:
+    resource
