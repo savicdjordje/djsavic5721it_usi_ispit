@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckRole;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,87 +14,90 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Dashboard
-Route::prefix('/dashboard')
-    ->name('dashboard.')
-    ->group(function () {
-        // Route::get('/users', App\Livewire\Dashboard\UserIndex::class)->name(
-        //     'users.index'
-        // );
+Route::middleware(['auth', CheckRole::class . ':admin:zaposleni'])->name('admin.')->prefix('/admin')->group(function () {
 
-        // Route::get(
-        //     '/users/create',
-        //     App\Livewire\Dashboard\UserCreate::class
-        // )->name('users.create');
+    Route::prefix('/dashboard')
+        ->name('dashboard.')
+        ->group(function () {
+            // Route::get('/users', App\Livewire\Dashboard\UserIndex::class)->name(
+            //     'users.index'
+            // );
 
-        // Route::get(
-        //     '/users/{user}',
-        //     App\Livewire\Dashboard\UserEdit::class
-        // )->name('users.edit');
+            // Route::get(
+            //     '/users/create',
+            //     App\Livewire\Dashboard\UserCreate::class
+            // )->name('users.create');
 
-        Route::get('/bills', App\Livewire\Dashboard\BillIndex::class)->name(
-            'bills.index'
-        );
+            // Route::get(
+            //     '/users/{user}',
+            //     App\Livewire\Dashboard\UserEdit::class
+            // )->name('users.edit');
 
-        Route::get(
-            '/bills/create',
-            App\Livewire\Dashboard\BillCreate::class
-        )->name('bills.create');
+            Route::get('/bills', App\Livewire\Dashboard\BillIndex::class)->name(
+                'bills.index'
+            );
 
-        Route::get(
-            '/bills/{bill}',
-            App\Livewire\Dashboard\BillEdit::class
-        )->name('bills.edit');
+            Route::get(
+                '/bills/create',
+                App\Livewire\Dashboard\BillCreate::class
+            )->name('bills.create');
 
-        Route::get(
-            '/services',
-            App\Livewire\Dashboard\ServiceIndex::class
-        )->name('services.index');
+            Route::get(
+                '/bills/{bill}',
+                App\Livewire\Dashboard\BillEdit::class
+            )->name('bills.edit');
 
-        Route::get(
-            '/services/create',
-            App\Livewire\Dashboard\ServiceCreate::class
-        )->name('services.create');
+            Route::get(
+                '/services',
+                App\Livewire\Dashboard\ServiceIndex::class
+            )->name('services.index');
 
-        Route::get(
-            '/services/{service}',
-            App\Livewire\Dashboard\ServiceEdit::class
-        )->name('services.edit');
+            Route::get(
+                '/services/create',
+                App\Livewire\Dashboard\ServiceCreate::class
+            )->name('services.create');
 
-        Route::get(
-            '/vehicles',
-            App\Livewire\Dashboard\VehicleIndex::class
-        )->name('vehicles.index');
+            Route::get(
+                '/services/{service}',
+                App\Livewire\Dashboard\ServiceEdit::class
+            )->name('services.edit');
 
-        Route::get(
-            '/vehicles/create',
-            App\Livewire\Dashboard\VehicleCreate::class
-        )->name('vehicles.create');
+            Route::get(
+                '/vehicles',
+                App\Livewire\Dashboard\VehicleIndex::class
+            )->name('vehicles.index');
 
-        Route::get(
-            '/vehicles/{vehicle}',
-            App\Livewire\Dashboard\VehicleEdit::class
-        )->name('vehicles.edit');
+            Route::get(
+                '/vehicles/create',
+                App\Livewire\Dashboard\VehicleCreate::class
+            )->name('vehicles.create');
 
-        Route::get(
-            '/statuses',
-            App\Livewire\Dashboard\StatusIndex::class
-        )->name('statuses.index');
+            Route::get(
+                '/vehicles/{vehicle}',
+                App\Livewire\Dashboard\VehicleEdit::class
+            )->name('vehicles.edit');
 
-        Route::get(
-            '/statuses/create',
-            App\Livewire\Dashboard\StatusCreate::class
-        )->name('statuses.create');
+            Route::get(
+                '/statuses',
+                App\Livewire\Dashboard\StatusIndex::class
+            )->name('statuses.index');
 
-        Route::get(
-            '/statuses/{status}',
-            App\Livewire\Dashboard\StatusEdit::class
-        )->name('statuses.edit');
-    });
+            Route::get(
+                '/statuses/create',
+                App\Livewire\Dashboard\StatusCreate::class
+            )->name('statuses.create');
 
-// Site
-Route::prefix('/')->group(function () {});
+            Route::get(
+                '/statuses/{status}',
+                App\Livewire\Dashboard\StatusEdit::class
+            )->name('statuses.edit');
+        });
 
-// Filament Panel
-Route::prefix('/panel')
-    ->name('panel.')
-    ->group(function () {});
+    // Site
+    Route::prefix('/')->group(function () {});
+
+    // Filament Panel
+    Route::prefix('/panel')
+        ->name('panel.')
+        ->group(function () {});
+});

@@ -9,6 +9,7 @@ use App\Models\Service;
 use App\Models\Vehicle;
 use Illuminate\Support\Collection;
 use App\Livewire\Dashboard\Services\Forms\UpdateForm;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceEdit extends Component
 {
@@ -28,9 +29,12 @@ class ServiceEdit extends Component
 
         $this->form->setService($service);
         $this->vehicles = Vehicle::pluck('registarski_broj', 'id');
-        $this->admin_users = User::pluck('ime', 'id');
-        $this->zaposleni_users = User::pluck('ime', 'id');
+        $this->zaposleni_users = User::where('role', 'zaposleni')->pluck('ime', 'id');
         $this->statuses = Status::pluck('naziv', 'id');
+
+        if (!$this->form->admin_id) {
+            $this->form->admin_id = Auth::id();
+        }
     }
 
     public function save()
@@ -38,6 +42,8 @@ class ServiceEdit extends Component
         $this->authorize('update', $this->service);
 
         $this->validate();
+
+        $this->form->admin_id = Auth::id();
 
         $this->form->save();
 

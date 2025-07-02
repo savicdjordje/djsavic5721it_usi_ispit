@@ -63,6 +63,6 @@ class Service extends Model
 
     public function racuni(): HasMany
     {
-        return $this->HasMany(Bill::class);
+        return $this->hasMany(Bill::class, 'usluga_id');
     }
 }

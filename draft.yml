@@ -1,10 +1,14 @@
 models:
-  # User:
-  #   ime: string
-  #   prezime: string
-  #   email: string unique
-  #   broj_telefona: string
-  #   role: enum:klijent,admin,zaposleni
+  User:
+    ime: string
+    prezime: string
+    email: string unique
+    email_verified_at: timestamp nullable
+    password: string
+    broj_telefona: string
+    role: enum:klijent,admin,zaposleni
+    remember_token: rememberToken
+    timestamps: true
 
   Status:
     naziv: string
@@ -18,8 +22,8 @@ models:
 
   Service:
     vozilo_id: id foreign:vehicle
-    zaposleni_id: id foreign:user
-    admin_id: id foreign:user
+    zaposleni_id: id foreign:user:as=zaposleni formLabel:Zaposleni
+    admin_id: id foreign:user:as=admin formLabel:Administrator
     status_id: id foreign:status
     naziv: string
     opis: text nullable
